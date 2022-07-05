@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid $main-color;
+    width: 100%;
+    padding: 10px 50px;
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+    img {
+      height: 150px;
+    }
+  
+    a {
+      text-decoration: none;
+      color: $second-color;
+      cursor: pointer;
+  
+      &:hover {
+        color: $main-color;
+      }
+    }
+  }
+  

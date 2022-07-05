@@ -1,0 +1,10 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+@import "./styles/base";
+@import "./components/header/header.scss";
+@import "./components/error/error.scss";
+@import "./components/footer/footer.scss";
+@import "./components/input/input.scss";
+@import "./pages/Home/Home";
+@import "./pages/EmployeeList/EmployeeList";
+@import "./pages/CreateEmployee/CreateEmployee";
