@@ -1,36 +1,10 @@
 import Input from "../../components/input/input";
 import Header from "../../components/header/header";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { saveEmployee } from "../../store";
-import { states, department } from "../../data";
 
 /**
 * This function create the Home page.
 */
 function App() {
-  const [isSent, setIsSent] = useState(false);
-  const [employeeForm, setEmployeeForm] = useState({
-    firstName: "",
-    lastName: "",
-    startDate: "",
-    department: "",
-    dateOfBirth: "",
-    street: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  });
-  const dispatch = useDispatch();
-
-  function saveEmployees() {
-    dispatch(saveEmployee(employeeForm));
-    setIsSent(true);
-  }
-
-  function closeModal() {
-    setIsSent(false);
-  }
 
   return (
     <div className="app">
@@ -42,132 +16,46 @@ function App() {
       <div className="container">
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
-          <div className="info">
-            <Input
-              onChange={(firstName) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  firstName: firstName.currentTarget.value,
-                });
-              }}
-              id="first-name"
-              name="First Name"
-              type="text"
-            ></Input>
-            <Input
-              onChange={(lastName) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  lastName: lastName.currentTarget.value,
-                });
-              }}
-              id="last-name"
-              name="Last Name"
-              type="text"
-            ></Input>
-            <Input
-              onChange={(dateOfBirth) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  dateOfBirth: dateOfBirth.currentTarget.value,
-                });
-              }}
-              id="date-of-birth"
-              name="Date of Birth"
-              type="date"
-            ></Input>
-            <Input
-              onChange={(startDate) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  startDate: startDate.currentTarget.value,
-                });
-              }}
-              id="start-date"
-              name="Start Date"
-              type="date"
-            ></Input>
-          </div>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name"></input>
 
-          <fieldset className="address">
-            <legend>Address</legend>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name"></input>
 
-            <Input
-              onChange={(street) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  street: street.currentTarget.value,
-                });
-              }}
-              className="address--element"
-              id="street"
-              name="Street"
-              type="text"
-            ></Input>
-            <Input
-              onChange={(city) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  city: city.currentTarget.value,
-                });
-              }}
-              className="address--element"
-              id="city"
-              name="City"
-              type="text"
-            ></Input>
-            <div className="address--element">
-              <label htmlFor="state">State</label>
-              <div className="dropdown"
-                options={states}
-                defaultOption="Please select a state"
-                onChange={(state) => {
-                  setEmployeeForm({
-                    ...employeeForm,
-                    state: state,
-                  });
-                }}
-              ></div>
-            </div>
-            <Input
-              onChange={(zipCode) => {
-                setEmployeeForm({
-                  ...employeeForm,
-                  zipCode: zipCode.currentTarget.value,
-                });
-              }}
-              className="address--element"
-              id="zip-code"
-              name="Zip Code"
-              type="number"
-            ></Input>
-          </fieldset>
+                <label for="date-of-birth">Date of Birth</label>
+                <input id="date-of-birth" type="text"></input>
 
-          <label htmlFor="department">Department</label>
-          <div className="dropdown"
-            options={department}
-            defaultOption="Please select a department"
-            onChange={(dep) => {
-              setEmployeeForm({
-                ...employeeForm,
-                department: dep,
-              });
-            }}
-          ></div>
-        </form>
+                <label for="start-date">Start Date</label>
+                <input id="start-date" type="text"></input>
 
-        <button onClick={saveEmployees}>Save</button>
+                <fieldset class="address">
+                    <legend>Address</legend>
+
+                    <label for="street">Street</label>
+                    <input id="street" type="text"></input>
+
+                    <label for="city">City</label>
+                    <input id="city" type="text"></input>
+
+                    <label for="state">State</label>
+                    <select name="state" id="state"></select>
+
+                    <label for="zip-code">Zip Code</label>
+                    <input id="zip-code" type="number"></input>
+                </fieldset>
+
+                <label for="department">Department</label>
+                <select name="department" id="department">
+                    <option>Sales</option>
+                    <option>Marketing</option>
+                    <option>Engineering</option>
+                    <option>Human Resources</option>
+                    <option>Legal</option>
+                </select>
+            </form>
+
+        <button>Save</button>
       </div>
-      {isSent ? (
-        <div className="blocker">
-          <div id="confirmation" className="modal">
-            Employee Created!
-            <p className="close" onClick={closeModal}>
-              x
-            </p>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
