@@ -8,9 +8,9 @@ function Header({ title, link, linkName }) {
       <img src={logo} alt="logo" />
 
       <div className="title">
-        <h1>{title}</h1>
+        <h1>test</h1>
       </div>
-      <NavLink to={link}>{linkName}</NavLink>
+      {/* <NavLink to={link}>{linkName}</NavLink> */}
     </header>
   );
 }

@@ -1,6 +1,4 @@
 import React from "react";
-import { Link,NavLink } from "react-router-dom";
-import { useState } from "react";
 import DataTable from "../../components/datatable/datatable";
 import Header from "../../components/header/header";
 import Input from "../../components/input/input";
