@@ -8,7 +8,7 @@ function Header({ title, link, linkName }) {
       <img src={logo} alt="logo" />
 
       <div className="title">
-        <h1>test</h1>
+        <h1>HRnet</h1>
       </div>
       {/* <NavLink to={link}>{linkName}</NavLink> */}
     </header>
