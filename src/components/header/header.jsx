@@ -1,5 +1,5 @@
 import logo from "../../assets/wealth_health.jpg";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function Header({ title, link, linkName }) {
@@ -9,8 +9,9 @@ function Header({ title, link, linkName }) {
 
       <div className="title">
         <h1>HRnet</h1>
+        <Link className="homeLink" to="/employees">View Current Employees</Link>
       </div>
-      {/* <NavLink to={link}>{linkName}</NavLink> */}
+      
     </header>
   );
 }
