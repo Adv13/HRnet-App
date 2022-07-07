@@ -1,0 +1,28 @@
+.main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+  }
+  
+.title{
+    color:$main-color;
+    padding:10px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    padding:10px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column; 
+}
+
+.address{
+    padding:20px;
+}
