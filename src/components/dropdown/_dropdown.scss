@@ -1,12 +1,12 @@
 .dropdown {
     &--header {
-      margin-bottom: 0.8em;
-      padding: 0.4em 2em 0.4em 1em;
+      margin: 0.8em;
+      padding: 0.5em;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
       font-weight: 500;
-      font-size: 1.3rem;
-      color: black;
-      border: 2px solid #93ad18;
+      font-size: 1rem;
+      //color: black;
+      border: 2px solid $main-color;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -18,10 +18,10 @@
         padding-left: 1em;
         background: #ffff;
         box-sizing: border-box;
-        color: #93ad18;
+        color: $main-color;
         font-size: 1.3rem;
         font-weight: 500;
-        border: 2px solid #93ad18;
+        border: 2px solid $main-color;
         border-radius: 5px;
   
         &:first-child {
@@ -30,10 +30,12 @@
   
         li {
           list-style: none;
-          margin-bottom: 0.8em;
+          padding:0.5em;
+          padding-right:1.2em;
           cursor: pointer;
           &:hover {
-            color: #5a6f08;
+            color: $second-color;
+            color:lighten($second-color, 20);
           }
         }
       }

@@ -29,6 +29,10 @@
     font-weight:bold;
     color: $main-color; 
     margin:2%;
+    &--element {
+        width: 50%;
+        margin-left:25%;
+      }
 }
 
 .department{
@@ -73,4 +77,14 @@ legend{
 .dept{
     font-size:25px;
     margin-bottom:15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .address{
+        &--element {
+            width: 95%;
+            margin-left:5%;
+          }
+    }
+ 
 }

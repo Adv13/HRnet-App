@@ -86,7 +86,7 @@ function Home(){
             
                 <fieldset className="address">
                     <legend>Address</legend>
-
+                        
                         <Input
                             onChange={(street) => {
                                 setEmployeeForm({
@@ -115,7 +115,7 @@ function Home(){
                     <label htmlFor="state">State</label>
                         <Dropdown
                             options={states}
-                            defaultOption="Please select a state"
+                            defaultOption="Select a state"
                             onChange={(state) => {
                             setEmployeeForm({
                                 ...employeeForm,
@@ -141,7 +141,7 @@ function Home(){
                     <label htmlFor="department" className="dept">Department</label>
                     <Dropdown
                         options={department}
-                        defaultOption="Please select a department"
+                        defaultOption="Select a department"
                         onChange={(dep) => {
                         setEmployeeForm({
                             ...employeeForm,
