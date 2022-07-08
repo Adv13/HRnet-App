@@ -3,7 +3,8 @@ import Input from "../../components/input/input";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {saveEmployee} from "../../store";
-import {states} from "../../data";
+import {states, department} from "../../data";
+import Dropdown from "../../components/dropdown/dropdown";
 
 function Home(){
 
@@ -35,8 +36,8 @@ function Home(){
             <Header/>
             <div className="container">
             <h1 className="title">Create Employee</h1>
+            <form action="#" className="form" id="create-employee">
             <div className="info">
-                <form action="#" className="form" id="create-employee">
                     <Input
                 onChange={(firstName) => {
                     setEmployeeForm({
@@ -81,10 +82,8 @@ function Home(){
                 name="Start Date"
                 type="date"
                 ></Input>
-                </form>
             </div>
             
-            <form>
                 <fieldset className="address">
                     <legend>Address</legend>
 
@@ -114,16 +113,16 @@ function Home(){
                         ></Input>
                     <div className="address--element">
                     <label htmlFor="state">State</label>
-                        <div
+                        <Dropdown
                             options={states}
-                            defaultoption="Please select a state"
+                            defaultOption="Please select a state"
                             onChange={(state) => {
                             setEmployeeForm({
                                 ...employeeForm,
                                 state: state,
-                            });
+                                });
                             }}
-                        ></div>
+                        ></Dropdown>
                     </div>
                         <Input
                             onChange={(zipCode) => {
@@ -140,13 +139,16 @@ function Home(){
                 </fieldset>
                 <div className="department">
                     <label htmlFor="department" className="dept">Department</label>
-                    <select name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
+                    <Dropdown
+                        options={department}
+                        defaultOption="Please select a department"
+                        onChange={(dep) => {
+                        setEmployeeForm({
+                            ...employeeForm,
+                            department: dep,
+                        });
+                        }}
+                    ></Dropdown>
                 </div>
             </form>
 
