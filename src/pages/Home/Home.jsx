@@ -1,26 +1,86 @@
 import Header from "../../components/header/header";
-
+import Input from "../../components/input/input";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+import { saveEmployee } from "../../store";
+import { states, department } from "../../data";
 
 function Home(){
+
+    const [isSent, setIsSent] = useState(false);
+    const [employeeForm, setEmployeeForm] = useState({
+        firstName: "",
+        lastName: "",
+        startDate: "",
+        department: "",
+        dateOfBirth: "",
+        street: "",
+        city: "",
+        state: "",
+        zipCode: "",
+      });
+      const dispatch = useDispatch();
+    
+      function saveEmployees() {
+        dispatch(saveEmployee(employeeForm));
+        setIsSent(true);
+      }
+    
+      function closeModal() {
+        setIsSent(false);
+      }
+
     return(
-        
         <main>
             <Header/>
             <div class="container">
             <h1 className="title">Create Employee</h1>
             <div className="info">
                 <form action="#" className="form" id="create-employee">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name"></input>
-
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name"></input>
-
-                    <label for="date-of-birth">Date of Birth</label>
-                    <input id="date-of-birth" type="text"></input>
-
-                    <label for="start-date">Start Date</label>
-                    <input id="start-date" type="text"></input>
+                    <Input
+                onChange={(firstName) => {
+                    setEmployeeForm({
+                    ...employeeForm,
+                    firstName: firstName.currentTarget.value,
+                    });
+                }}
+                id="first-name"
+                name="First Name"
+                type="text"
+                ></Input>
+                <Input
+                onChange={(lastName) => {
+                    setEmployeeForm({
+                    ...employeeForm,
+                    lastName: lastName.currentTarget.value,
+                    });
+                }}
+                id="last-name"
+                name="Last Name"
+                type="text"
+                ></Input>
+                <Input
+                onChange={(dateOfBirth) => {
+                    setEmployeeForm({
+                    ...employeeForm,
+                    dateOfBirth: dateOfBirth.currentTarget.value,
+                    });
+                }}
+                id="date-of-birth"
+                name="Date of Birth"
+                type="date"
+                ></Input>
+                <Input
+                onChange={(startDate) => {
+                    setEmployeeForm({
+                    ...employeeForm,
+                    startDate: startDate.currentTarget.value,
+                    });
+                }}
+                id="start-date"
+                name="Start Date"
+                type="date"
+                ></Input>
                 </form>
             </div>
             
@@ -28,30 +88,69 @@ function Home(){
                 <fieldset className="address">
                     <legend>Address</legend>
 
-                    <label for="street">Street</label>
-                    <input id="street" type="text"></input>
-
-                    <label for="city">City</label>
-                    <input id="city" type="text"></input>
-
-                    <label for="state">State</label>
-                    <select name="state" id="state"></select>
-
-                    <label for="zip-code">Zip Code</label>
-                    <input id="zip-code" type="number"></input>
+                        <Input
+                            onChange={(street) => {
+                                setEmployeeForm({
+                                ...employeeForm,
+                                street: street.currentTarget.value,
+                                });
+                            }}
+                            className="address--element"
+                            id="street"
+                            name="Street"
+                            type="text"
+                        ></Input>
+                        <Input
+                            onChange={(city) => {
+                                setEmployeeForm({
+                                ...employeeForm,
+                                city: city.currentTarget.value,
+                                });
+                            }}
+                            className="address--element"
+                            id="city"
+                            name="City"
+                            type="text"
+                        ></Input>
+                    <div className="address--element">
+                    <label htmlFor="state">State</label>
+                        <div
+                            options={states}
+                            defaultOption="Please select a state"
+                            onChange={(state) => {
+                            setEmployeeForm({
+                                ...employeeForm,
+                                state: state,
+                            });
+                            }}
+                        ></div>
+                    </div>
+                        <Input
+                            onChange={(zipCode) => {
+                                setEmployeeForm({
+                                ...employeeForm,
+                                zipCode: zipCode.currentTarget.value,
+                                });
+                            }}
+                            className="address--element"
+                            id="zip-code"
+                            name="Zip Code"
+                            type="number"
+                        ></Input>
                 </fieldset>
-
-                <label for="department">Department</label>
-                <select name="department" id="department">
-                    <option>Sales</option>
-                    <option>Marketing</option>
-                    <option>Engineering</option>
-                    <option>Human Resources</option>
-                    <option>Legal</option>
-                </select>
+                <div className="department">
+                    <label for="department" className="dept">Department</label>
+                    <select name="department" id="department">
+                        <option>Sales</option>
+                        <option>Marketing</option>
+                        <option>Engineering</option>
+                        <option>Human Resources</option>
+                        <option>Legal</option>
+                    </select>
+                </div>
             </form>
 
-            <button onclick="saveEmployee()">Save</button>
+            <button onclick="saveEmployee()" className="saveBtn">Save</button>
         </div>
         <div id="confirmation" class="modal">Employee Created!</div>
         </main>

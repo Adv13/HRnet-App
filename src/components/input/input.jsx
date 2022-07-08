@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function Input({ className, name, id, type, onChange }) {
   return (
-    <div className={className}>
+    <div className={className} className="infos">
       <label htmlFor={id}>{name}</label>
       <input onChange={onChange} type={type} id={id}></input>
     </div>
