@@ -2,8 +2,8 @@ import Header from "../../components/header/header";
 import Input from "../../components/input/input";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import { saveEmployee } from "../../store";
-import { states, department } from "../../data";
+import {saveEmployee} from "../../store";
+import {states} from "../../data";
 
 function Home(){
 
@@ -33,7 +33,7 @@ function Home(){
     return(
         <main>
             <Header/>
-            <div class="container">
+            <div className="container">
             <h1 className="title">Create Employee</h1>
             <div className="info">
                 <form action="#" className="form" id="create-employee">
@@ -116,7 +116,7 @@ function Home(){
                     <label htmlFor="state">State</label>
                         <div
                             options={states}
-                            defaultOption="Please select a state"
+                            defaultoption="Please select a state"
                             onChange={(state) => {
                             setEmployeeForm({
                                 ...employeeForm,
@@ -139,7 +139,7 @@ function Home(){
                         ></Input>
                 </fieldset>
                 <div className="department">
-                    <label for="department" className="dept">Department</label>
+                    <label htmlFor="department" className="dept">Department</label>
                     <select name="department" id="department">
                         <option>Sales</option>
                         <option>Marketing</option>
@@ -150,9 +150,18 @@ function Home(){
                 </div>
             </form>
 
-            <button onclick="saveEmployee()" className="saveBtn">Save</button>
+            <button onClick="saveEmployee()" className="saveBtn">Save</button>
         </div>
-        <div id="confirmation" class="modal">Employee Created!</div>
+        {isSent ? (
+            <div className="blocker">
+            <div id="confirmation" className="modal">
+                Employee Created!
+                <p className="close" onClick={closeModal}>
+                x
+                </p>
+            </div>
+            </div>
+        ) : null}
         </main>
     )
 }
