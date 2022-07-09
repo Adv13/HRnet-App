@@ -5,9 +5,18 @@ table {
     tr {
       border: 2px solid black;
       margin: 10px;
+      color: $main-color;
     }
   
     .odd {
-      background-color: #cccccc;
+      background-color: #e1e1e1;
+      color: $second-color;
+    }
+    .even {
+      background-color: #f7f7f7;
+      color: $second-color;
     }
   }
+  
+
+  

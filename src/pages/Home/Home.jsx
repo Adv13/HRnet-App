@@ -24,6 +24,7 @@ function Home(){
     
       function saveEmployees() {
         dispatch(saveEmployee(employeeForm));
+        console.log(employeeForm);
         setIsSent(true);
       }
     
