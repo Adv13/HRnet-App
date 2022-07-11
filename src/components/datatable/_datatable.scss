@@ -16,7 +16,31 @@ table {
       background-color: #f7f7f7;
       color: $second-color;
     }
-  }
+
+    th {
+      padding: 8px;
+      border-bottom: 1px solid #dcdcdc;
+      font-weight: bold;
+      text-align: left;
+  
+      &.default {
+        background-image: url("../../assets/default.png");
+      }
+      &.up {
+        background-image: url("../../assets/up_arrow.png");
+      }
+      &.down {
+        background-image: url("../../assets/down_arrow.png");
+      }
+  
+      &.up,
+      &.default,
+      &.down {
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: center right;
+      }
+  }}
   
 
   

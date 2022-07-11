@@ -1,4 +1,6 @@
-function Tbody({ datas }) {
+import PropTypes from 'prop-types';
+
+function Tbody({ tableData, columns }) {
     function addClassname(id) {
       let value = "";
   
@@ -12,8 +14,8 @@ function Tbody({ datas }) {
   
     return (
       <tbody>
-        {datas.map((data) => (
-          <tr key={data.id} role="row" className={addClassname(data.id)}>
+        {tableData.map((data, index) => (
+        <tr key={index} role="row" className={addClassname(index)}>
             <td className="sorting_1">{data.firstName}</td>
             <td>{data.lastName}</td>
             <td>{data.startDate}</td>
@@ -28,5 +30,10 @@ function Tbody({ datas }) {
       </tbody>
     );
   }
+
+  Tbody.propTypes = {
+    tableData: PropTypes.array,
+    columns: PropTypes.array,
+  };
   
   export default Tbody;

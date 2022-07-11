@@ -1,80 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "../../components/datatable/datatable";
 import Header from "../../components/header/header";
 import Input from "../../components/input/input";
+import { datas, columns } from "../../data";
+import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
+
 
 function EmployeeList() {
-  const [entry, setEntry] = useState(0);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(0);
+  const [employeesPerPage, setEmployeesPerPage] = useState(10);
+  const [numberOfEmployeesVisited, setNumberOfEmployeesVisited] = useState(
+    page * employeesPerPage
+  );
+  const employeeList = useSelector((store) => store.employeeList);
+  const [employeeFiltered, setEmployeeFiltered] = useState([]);
+  const totalPages = Math.ceil(employeeList.length / employeesPerPage);
 
+  useEffect(() => {
+    setNumberOfEmployeesVisited(page * employeesPerPage);
+  }, [page, employeesPerPage]);
 
-  const datas = [
-    {
-      id: 1,
-      firstName: "Alex",
-      lastName: "A",
-      startDate: "12/08/2021",
-      department: "Department",
-      dateOfBirth: "31/03/2002",
-      street: "Street",
-      city: "City",
-      state: "State",
-      zipCode: "33000",
-    },
-    {
-      id: 2,
-      firstName: "Jack",
-      lastName: "B",
-      startDate: "14/07/1990",
-      department: "Department",
-      dateOfBirth: "01/01/1968",
-      street: "Street",
-      city: "City",
-      state: "State",
-      zipCode: "75000",
-    },
-    {
-      id: 3,
-      firstName: "Suzie",
-      lastName: "C",
-      startDate: "12/12/2021",
-      department: "Department",
-      dateOfBirth: "23/12/1980",
-      street: "Street",
-      city: "City",
-      state: "State",
-      zipCode: "31000",
-    },
-    {
-      id: 4,
-      firstName: "Julia",
-      lastName: "D",
-      startDate: "23/09/2020",
-      department: "Department",
-      dateOfBirth: "24/02/1998",
-      street: "Street",
-      city: "City",
-      state: "State",
-      zipCode: "56000",
-    },
-  ];
+  useEffect(() => {
+    setEmployeeFiltered(
+      employeeList
+        .filter(
+          (item) =>
+            item.city.toString().toLowerCase().includes(search) ||
+            item.department.toString().toLowerCase().includes(search) ||
+            item.firstName.toString().toLowerCase().includes(search) ||
+            item.dateOfBirth.toString().toLowerCase().includes(search) ||
+            item.lastName.toString().toLowerCase().includes(search) ||
+            item.startDate.toString().toLowerCase().includes(search) ||
+            item.state.toString().toLowerCase().includes(search) ||
+            item.street.toString().toLowerCase().includes(search) ||
+            item.zipCode.toString().toLowerCase().includes(search)
+        )
+        .slice(
+          numberOfEmployeesVisited,
+          numberOfEmployeesVisited + employeesPerPage
+        )
+    );
+  }, [employeeList, search, employeesPerPage, numberOfEmployeesVisited]);
 
-  const columns = [
-    { title: "First Name", data: "firstName" },
-    { title: "Last Name", data: "lastName" },
-    { title: "Start Date", data: "startDate" },
-    { title: "Department", data: "department" },
-    { title: "Date of Birth", data: "dateOfBirth" },
-    { title: "Street", data: "street" },
-    { title: "City", data: "city" },
-    { title: "State", data: "state" },
-    { title: "Zip Code", data: "zipCode" },
-  ];
+  //search function
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
 
-  function searchEmployee(e) {
-    const target = e.target.value.toString().toLowerCase();
-    console.log(target);
+  const changePage = ({ selected }) => {
+    setPage(selected);
+  };
+  // Changes the number of employees showed
+  function changeEntries(event) {
+    setEmployeesPerPage(event.target.value);
   }
-
   return (
     <div id="employee-div" className="wrapper">
       <Header title="Current Employees" link="/" linkName="Home"></Header>
@@ -82,9 +63,11 @@ function EmployeeList() {
         <div className="employee-table--header">
           <div>
             Show{" "}
-            <select>
+            <select onChange={changeEntries}>
               <option value="10">10</option>
-              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
             </select>{" "}
             entries
           </div>
@@ -92,22 +75,43 @@ function EmployeeList() {
             id="search"
             name="Search : "
             type="text"
-            onChange={searchEmployee}
+            onChange={handleSearch}
           ></Input>
         </div>
         <div className="employee-table--body">
-          <DataTable columns={columns} datas={datas}></DataTable>
+          {employeeFiltered.length === 0 ? (
+            <p>No matching records found</p>
+          ) : (
+            <DataTable columns={columns} datas={employeeFiltered}></DataTable>
+          )}
         </div>
         <div className="employee-table--footer">
           <span>
-            Showing {datas.length < 10 ? datas.length : entry} of {datas.length}{" "}
-            entries
+            Showing{" "}
+            {employeeFiltered.length === 0 ? 0 : numberOfEmployeesVisited + 1}{" "}
+            to {""}
+            {employeeFiltered.length < employeesPerPage
+              ? page > 0
+              ? numberOfEmployeesVisited + employeeFiltered.length
+              : employeeFiltered.length
+              : employeesPerPage}{" "}
+            of {employeeList.length} entries{" "}
+            {employeeFiltered.length !== datas.length &&
+            employeeFiltered.length !== employeesPerPage
+              ? "(filtered from " + datas.length + " total entries)"
+              : null}
           </span>
-          <div>
-            <button className="previous">Previous</button>
-            <button className="page-number">1</button>
-            <button className="next">Next</button>
-          </div>
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={totalPages}
+            onPageChange={changePage}
+            containerClassName={"navigationButtons"}
+            previousLinkClassName={"previousButton"}
+            nextLinkClassName={"nextButton"}
+            disabledClassName={"navigationDisabled"}
+            activeClassName={"navigationActive"}
+          ></ReactPaginate>
         </div>
       </div>
     </div>
