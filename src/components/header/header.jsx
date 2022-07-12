@@ -5,11 +5,14 @@ import PropTypes from "prop-types";
 function Header({ title, link, linkName }) {
   return (
     <header className="header">
-      <img src={logo} alt="logo" />
+      <Link className="homeLink" to="/">
+        <img src={logo} alt="logo" />
+      </Link>
+      
 
       <div className="title">
-        <h1>HRnet</h1>
-        <Link className="homeLink" to="/employees">View Current Employees</Link>
+        <h1>{title}</h1>
+        <Link className="listLink" to={link}>{linkName}</Link>
       </div>
       
     </header>

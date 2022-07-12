@@ -34,7 +34,11 @@ function Home(){
 
     return(
         <main>
-            <Header/>
+            <Header
+            title="HRnet"
+            link="/employees"
+            linkName="View Current Employees"
+            ></Header>
             <div className="container">
             <h1 className="title">Create Employee</h1>
             <form action="#" className="form" id="create-employee">
@@ -153,12 +157,12 @@ function Home(){
                 </div>
             </form>
 
-            <button onClick="saveEmployee()" className="saveBtn">Save</button>
+            <button onClick={saveEmployees} className="saveBtn">Save</button>
         </div>
         {isSent ? (
             <div className="blocker">
             <div id="confirmation" className="modal">
-                Employee Created!
+                Employee created!
                 <p className="close" onClick={closeModal}>
                 x
                 </p>
