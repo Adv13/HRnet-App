@@ -120,7 +120,7 @@ function Home(){
                     <label htmlFor="state">State</label>
                         <Dropdown
                             options={states}
-                            defaultOption="Select a state"
+                            defaultOption={states[0].name}
                             onChange={(state) => {
                             setEmployeeForm({
                                 ...employeeForm,
@@ -146,7 +146,7 @@ function Home(){
                     <label htmlFor="department" className="dept">Department</label>
                     <Dropdown
                         options={department}
-                        defaultOption="Select a department"
+                        defaultOption={department[0].name}
                         onChange={(dep) => {
                         setEmployeeForm({
                             ...employeeForm,
