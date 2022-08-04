@@ -153,3 +153,11 @@ legend{
     }
  
 }
+
+
+.dropdown {
+  width: 100%;
+  &--header {
+    font-size: 1.1rem;
+  }
+}

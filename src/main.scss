@@ -7,3 +7,10 @@
 @import "./components/datatable/datatable";
 @import "./pages/Home/home";
 @import "./pages/EmployeeList/EmployeeList";
+
+.dropdown {
+    width: 100%;
+    &--header {
+      font-size: 1.1rem;
+    }
+  }
